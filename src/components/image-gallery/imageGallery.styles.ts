@@ -14,7 +14,7 @@ export const ImageWrapper = styled.section`
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     grid-gap: 16px;
     margin: 24px 0;
-    max-height: 300px;
+    max-height: 40vh;
     height: auto;
     width: 100%;
     overflow: scroll;

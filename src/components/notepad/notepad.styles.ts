@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
         height: 100%;
         display: flex;
         margin: 0;
-        padding: 0
+        padding: 0;
 `
 
 export const ListNotes = styled.div`
@@ -40,6 +40,7 @@ export const ListNotes = styled.div`
         max-width: 250px;
         flex: 25%;
         padding-top: 10px;
+        overflow: scroll;
 `
 
 export const TextArea = styled.textarea`

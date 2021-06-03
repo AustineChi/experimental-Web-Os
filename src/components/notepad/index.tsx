@@ -11,6 +11,7 @@ import {
 	Wrapper,
 	CreateIcon,
 	TrashIcon,
+	SortIcon,
 	SearchBox,
 	Text,
 } from "./notepad.styles";
@@ -25,6 +26,7 @@ const NotePad: React.FC<ToolbarAppModel> = ({
 }) => {
 	const [activeNote, setActiveNote] = useState<string>(notes[0]?.id || null);
 	const [searchValue, setSearchValue] = useState<string>("");
+	const [sorted, setSorted] = useState<boolean>(false);
 
 	const addNote = (): void => {
 		const id = uuid();
@@ -54,6 +56,26 @@ const NotePad: React.FC<ToolbarAppModel> = ({
 		setActiveNote(data[position - 1]?.id || null);
 	};
 
+	const sortNotes = () => {
+		if (!sorted) {
+			const data = [...notes].sort((a, b) =>
+				b.text.localeCompare(a.text)
+			);
+			setNotes(data);
+		}
+		if (sorted) {
+			// const data = [...notes].sort(
+			// 	(a, b) =>
+			// 		new Date(b.date).valueOf() - new Date(a.date).valueOf()
+			// );
+			const data = [...notes].sort((a, b) =>
+				a.text.localeCompare(b.text)
+			);
+			setNotes(data);
+		}
+
+		setSorted((prev) => !prev);
+	};
 
 	return (
 		<Container>
@@ -67,7 +89,9 @@ const NotePad: React.FC<ToolbarAppModel> = ({
 						disabled={!notes.length || !!!activeNote}
 						onClick={deleteNote}
 					/>
+					<SortIcon onClick={sortNotes} />
 					<SearchBox
+						placeholder="search..."
 						value={searchValue}
 						onChange={(e) => setSearchValue(e.target.value)}
 					/>
@@ -105,7 +129,9 @@ const NotePad: React.FC<ToolbarAppModel> = ({
 						onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
 							updateNote(e.target.value)
 						}
-						onClick={notes[0]?.text !== "" && addNote}
+						onClick={() => {
+							if (notes[0]?.text !== "") addNote();
+						}}
 					/>
 				</Wrapper>
 			</Modal>

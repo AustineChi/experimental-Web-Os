@@ -37,7 +37,6 @@ const LoginContainer = ({ setToken }) => {
 			setLoginStep("password");
 		}
 	};
-
 	return (
 		<Container>
 			<LoginPic />
