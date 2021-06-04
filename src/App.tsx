@@ -5,7 +5,7 @@ import Login from "./components/login";
 import ToolBar from "./components/toolbar";
 
 const App: () => JSX.Element = () => {
-	const [token, setToken] = useState<boolean>(true);
+	const [token, setToken] = useState<boolean>(false);
 
 	return (
 		<MainContainer>
