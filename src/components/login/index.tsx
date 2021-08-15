@@ -25,7 +25,7 @@ const LoginContainer = ({ setToken }) => {
 	const submit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (password) {
-			if (email === "borgoth@mordos.com" && password === "12bindthem") {
+			if (email === "admin@abc.com" && password === "admin") {
 				setToken(true);
 			} else {
 				setEmail("");

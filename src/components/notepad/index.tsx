@@ -39,10 +39,10 @@ const NotePad: React.FC<ToolbarAppModel> = ({
 		setNotes((prev) => [data, ...prev]);
 	};
 
-	const updateNote = (val: string): void => {
+	const updateNote = (e): void => {
 		const data = [...notes].map((item) => {
 			if (item.id === activeNote) {
-				item.text = val;
+				item.text = e.target.value;
 			}
 			return item;
 		});
@@ -64,10 +64,6 @@ const NotePad: React.FC<ToolbarAppModel> = ({
 			setNotes(data);
 		}
 		if (sorted) {
-			// const data = [...notes].sort(
-			// 	(a, b) =>
-			// 		new Date(b.date).valueOf() - new Date(a.date).valueOf()
-			// );
 			const data = [...notes].sort((a, b) =>
 				a.text.localeCompare(b.text)
 			);
@@ -100,10 +96,10 @@ const NotePad: React.FC<ToolbarAppModel> = ({
 					<ListNotes>
 						{notes &&
 							notes
-								.filter((note) =>
+								.filter(note=>
 									note.text.includes(searchValue)
 								)
-								.map((note) => (
+								.map(note => (
 									<Text
 										key={note.id}
 										active={note.id === activeNote}
@@ -126,12 +122,8 @@ const NotePad: React.FC<ToolbarAppModel> = ({
 								  ]?.text
 								: ""
 						}
-						onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-							updateNote(e.target.value)
-						}
-						onClick={() => {
-							if (notes[0]?.text !== "") addNote();
-						}}
+						onChange={updateNote}
+						onClick={(notes[0]?.text !== "") && addNote}
 					/>
 				</Wrapper>
 			</Modal>
